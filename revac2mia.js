@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const { type } = require("express/lib/response");
 const req = require("express/lib/request");
+const res = require("express/lib/response");
 
 const app = express();
 app.use(bodyParser.urlencoded({extended:true}));
@@ -35,6 +36,13 @@ app.post("/cadastropessoa", async(req, res)=>{
    const cep = req.body.cep;
    const nascimento = req.body.nacsimento
 
+
+   if(nome == null|| email == null || endereco == null || numero == null || cep == null || nascimento == null){
+    return res.status(400).json({error : "Preencha todos os campos"});
+   };
+
+   const emailExiste = await Pessoa.findOne({email:email})
+
    const pessoa = new Pessoa ({
     nome: nome,
     email: email,
@@ -62,3 +70,10 @@ app.listen(port, ()=>{
     console.log(`Servidor rodando na porta ${port}`);
 })
 
+app.get("/cadastropessoa", async(req, res)=>{
+    res.sendFile(__dirname +"/cadastropessoa.html");
+})
+
+app.get("/", async(req, res)=>{
+    res.sendFile(__dirname + "/index.html");
+})
