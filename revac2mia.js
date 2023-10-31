@@ -33,7 +33,7 @@ app.post("/cadastropessoa", async(req, res)=>{
    const endereco = req.body.endereco;
    const numero = req.body.numero;
    const cep = req.body.cep;
-   const nacsimento = req.body.nacsimento
+   const nascimento = req.body.nacsimento
 
    const pessoa = new Pessoa ({
     nome: nome,
@@ -41,7 +41,7 @@ app.post("/cadastropessoa", async(req, res)=>{
     endereco: endereco,
     numero: numero,
     cep: cep, 
-    nacsimento: nacsimento
+    nascimento: nascimento
    })
 
    try{
@@ -61,3 +61,4 @@ app.post("/cadastropessoa", async(req, res)=>{
 app.listen(port, ()=>{
     console.log(`Servidor rodando na porta ${port}`);
 })
+
